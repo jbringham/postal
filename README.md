@@ -11,6 +11,8 @@ Jacob Bringham
 
 This project will compare U.S Census data with USPS office locations within Virginia in order to determine if there are under-served or over-served counties and communities. With this comparison, it will benefit policymakers to understand where USPS resources may be redistributed to service Virginians better.  
 
+Currently does not work since the server hosting the database should be down.
+
 
 ## CONTENTS
 
