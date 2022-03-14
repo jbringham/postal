@@ -1,0 +1,8 @@
+ALTER TABLE county ADD PRIMARY KEY (id);
+
+ALTER TABLE office ADD PRIMARY KEY (id);
+ALTER TABLE office ADD FOREIGN KEY (county_id) REFERENCES county(id);
+
+
+
+

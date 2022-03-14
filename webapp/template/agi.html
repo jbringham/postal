@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AGI</title>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+
+
+    {% include "styles.html" %} 
+    
+   <div class="realBody">
+     
+    <h3>Form</h3> 
+    <!-- Note that the action refers to a route in Flask -->
+    <form method="post" action="/agi" id="agi_in">
+        <p>View Counties with Aggregate Gross Income less than:
+          {% if agi_per_county %}
+          <input name="agi_per_county" value="{{agi_per_county}}" form="agi_in"/>
+          {% else %}
+          <input name="agi_per_county" value="47640800000" form="agi_in"/>
+          {% endif %}
+          <button type="submit" value="submit" form="agi_in">View</button>
+        </p>
+    </form> 
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+         <p style="color:#FF0000"> {{ message }} </p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <h3>Chart</h3>
+      <div id="dashboard_div">
+        
+        <!--Div that will hold the dashboard-->
+        
+          <!--Divs that will hold each control and chart-->
+          <div id="filter_div"></div>
+          <div id="chart_div"></div> 
+      </div>
+    </div>
+  
+      <script type="text/javascript">
+
+        // Load the Visualization API and the controls package.
+        google.charts.load('current', {'packages':['corechart', 'controls']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawDashboard);
+
+        // Callback that creates and populates a data table,
+        // instantiates a dashboard, a range slider and a pie chart,
+        // passes in the data and draws it.
+        function drawDashboard() {
+
+          {% if agi is defined %}
+          // Create our data table.
+          var data = google.visualization.arrayToDataTable([
+            ["Lat", "Long", "Name", "AGI", "Population"],
+            {% for row in agi %}
+                [{{ row[0] }}, {{ row[1] }}, "{{row[2]}}", {{row[3]}}, {{row[4]}}],
+            {% endfor %}
+          ]);
+
+          // Create a dashboard.
+          var dashboard = new google.visualization.Dashboard(
+              document.getElementById('dashboard_div'));
+
+          // Create a range slider, passing some options
+          var rangeSlider = new google.visualization.ControlWrapper({
+            'controlType': 'NumberRangeFilter',
+            'containerId': 'filter_div',
+            'options': {
+              'filterColumnLabel': 'AGI',
+              
+            }
+          });
+          {% endif %}
+
+          // Create a map, passing some options
+          var mapDisplay = new google.visualization.ChartWrapper({
+            'chartType': 'GeoChart',
+            'containerId': 'chart_div',
+            'options': {
+                'width': 500,
+                'height': 500,
+                'legend': 'none',
+                'region':'US-VA',
+                'resolution':'provinces',
+                'displayMode':'markers',
+                'chartArea': {'left': 15, 'top': 15, 'right': 0, 'bottom': 0},
+                }
+          });
+          
+
+          {% if agi is defined %}
+          // Establish dependencies, declaring that 'filter' drives 'mapDisplay',
+          // so that the pie chart will only display entries that are let through
+          // given the chosen slider range.
+          dashboard.bind(rangeSlider, mapDisplay);
+          {% endif %}
+
+          // Draw the dashboard.
+          dashboard.draw(data);
+          console.log("Drawing dashboard!");
+        }
+
+        function myFunction() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topnav") {
+            x.className += " responsive";
+          } else {
+            x.className = "topnav";
+          }
+        }
+      </script>
+  
+  </body>
+</html>

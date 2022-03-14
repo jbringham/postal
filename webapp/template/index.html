@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+      .zoom {
+        transition: transform .2s; /* Animation */
+        margin: 0 auto;
+      }
+
+      .zoom:hover {
+        transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+      }
+    </style>
+
+
+
+  </head>
+
+<body>
+
+{% include "styles.html" %} 
+
+<!-- <div class="topdiv">
+  <h1>Welcome to Postalrific</h1>
+  <img src="https://i.ibb.co/M9rLbrr/va.png" alt="va" border="0">
+  
+</div> -->
+
+<table style="width:100%">
+  <tr>
+    <td class="welcome"> <h1 style="font-size:5vw;">Welcome to Postalrific</h1></td>
+    <td ><img class="zoom" src="https://w3stu.cs.jmu.edu/bringhja/va.png" alt="va" width="320px" height="200px" border="0"></td>
+  </tr>
+</table>
+
+<div class="bottomDiv">
+  <h2>Problem Vision</h2>
+  <p>United States Postal Service (USPS) locations provide important services for many communities across the country, especially under-served communities that may be unprofitable for private businesses to provide postal services for. Although Congress appropriates funding for USPS, the decisions to open and close post offices is left to USPS itself and a Postal Regulatory Committee. Although there are some guidelines regarding protecting rural communities from post office closures, there is no set policy as to which communities will be serviced and which will not be. USPS holds the ultimate authority to close locations, regardless of local or state level consultation. </p>
+
+  <p>Our group believes it is important to look at this important public data to ensure that USPS resources are being distributed equitably across income levels, racial groups, and political boundaries. This project will compare US Census data with USPS office locations within Virginia in order to determine if there are under-served or over-served counties and communities. By comparing this data, it may be useful for policymakers to understand where USPS resources may be redistributed to service Virginians better. It may also be useful to decide which areas may be over-served if policymakers decide to cut back USPS appropriations, a popular idea in recent years amongst those who wish to cutback government spending.</p>
+
+
+
+  <h2>Data and Questions</h2>
+  <p>For this project our information on post offices came from the Harvard Dataverse. We will be utilizing the county's the post office are located in VA as well as the name and start date. We are also thinking about incorporating the population density of each county into our data sets. As you can see in the table below, our data is primarily focused on post offices located in Virginia and whether they are equally distributed within the state. As of now, there is a lot of information about post offices in the United States. As a result, we are narrowing our search to only the ones within the state of Virginia. When referring to the data, you will also notice information about when the office was established and discontinued. One more thing the second picture illustrates, are the coordinates we will be utilizing in order observe which counties are under served in the state of Virginia. </p>
+
+  <p>One of the main questions our data will answer is whether different counties in the state have equal access to the United States Postal Service. It will also provide a convenient way for individuals who are searching for homes and need access to a postal service that is within their range. It will allow future homeowners to make educated decisions on their accessibility through the postal services for collecting, processing, and transmitting mail. Finally, it will also provide information about which post offices are still in commission today. The reason these questions are important for us to answer is because it allows us to see changes within a community and provide aid in terms of future development.</p>
+</div>
+
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>
+
+</body>
+</html>
